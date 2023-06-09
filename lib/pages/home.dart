@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:check_in/pages/sign_up_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -92,7 +93,9 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Text('Don'"'"'t hava a account?'),
-              ElevatedButton(onPressed: (){},
+              ElevatedButton(onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUp()));
+              },
                   child: Text(
                     'Sign up'
                   ),
