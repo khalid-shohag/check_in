@@ -61,11 +61,15 @@ class _SignUpState extends State<SignUp> {
 
 
       //color: Colors.grey,
-      body: Column(
+      body: SafeArea(
         //mainAxisAlignment: MainAxisAlignment.start,
         //crossAxisAlignment: CrossAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Padding(padding: EdgeInsets.only(right: 220)),
               Text(
@@ -82,6 +86,7 @@ class _SignUpState extends State<SignUp> {
           ),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
@@ -176,8 +181,10 @@ class _SignUpState extends State<SignUp> {
             ],
           ),
         ],
+          ),
       ),
 
+    ),
     );
   }
 }
