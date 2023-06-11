@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'package:mysql_client/mysql_client.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
+import 'package:check_in/shared/Option.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
+
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -15,6 +25,35 @@ class _SignUpState extends State<SignUp> {
   TextEditingController nationality = TextEditingController();
   TextEditingController phoneMail = TextEditingController();
   TextEditingController password = TextEditingController();
+
+
+  void sendData() {
+    Map<String, dynamic> userData = {
+      "firstName": firstName.text,
+      "lastName": lastName.text,
+      "occupation": occupation.text,
+      "nationality": nationality.text,
+      "phone_mail": phoneMail.text,
+      "password": password.text
+    };
+    FirebaseFirestore.instance.collection("user_info").add(userData);
+  }
+
+
+
+  // Future senddata() async {
+  //   final response = await http.post(Uri.parse("localhost/data_check/insertdata.php"), body: {
+  //     "firstname": firstName.text,
+  //     "lastname": lastName.text,
+  //     "occupation":occupation.text,
+  //     "nationality": nationality.text,
+  //     "phone": phoneMail.text,
+  //     "pass": password.text
+  //   });
+  //   print("Body: "+response.statusCode.toString());
+  // }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +158,19 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                   ),
+                  ElevatedButton(onPressed: (){
+                    sendData();
+                  },
+                      child: Text(
+                        'submit'
+                      ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    )
+                  ),)
                 ],
               )
             ],
