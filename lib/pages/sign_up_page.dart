@@ -8,6 +8,7 @@ import 'package:check_in/shared/Option.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:check_in/services/register.dart';
 import 'package:check_in/services/alertDialog.dart';
+import 'package:check_in/pages/home.dart';
 
 
 
@@ -59,7 +60,13 @@ class _SignUpState extends State<SignUp> {
     bool mailAlreadyUse = await Register.userRegistration(phoneMail.text, password.text);
     print("Value:"+mailAlreadyUse.toString());
     if(mailAlreadyUse!=true) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => alertDialog()));    }
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          alertDialog('Email already in use.\nGo Back\nJust Click Here', 1)));    }
+    else {
+      sendData();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          Home()));
+    }
 
   }
 
@@ -175,7 +182,6 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   ElevatedButton(onPressed: (){
-                    sendData();
                     authUser();
                   },
                       child: Text(

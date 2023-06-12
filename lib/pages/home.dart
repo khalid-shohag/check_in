@@ -5,6 +5,7 @@ import 'package:check_in/pages/sign_up_page.dart';
 import 'package:check_in/services/sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:check_in/pages/login_page.dart';
+import 'package:check_in/services/alertDialog.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +19,20 @@ class _HomeState extends State<Home> {
   //used for user input
   TextEditingController mail_phone = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  void checkLogIn() async {
+    bool invalidInfo = await SignIn.userSignIn(mail_phone.text, password.text);
+    // Future<bool> user = SignIn.userSignIn(mail_phone.text, password.text);
+    print("Value: "+invalidInfo.toString());
+    if(invalidInfo==false) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          alertDialog('Invalid Email Password.\nGo Back.\nClick Here', 2)));
+      print("Working");
+    }
+    else {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,37 +96,8 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              ElevatedButton(onPressed: () async {
-                final User? user = (await auth.signInWithEmailAndPassword(
-                email: mail_phone.text,
-                password: password.text,
-                )
-                ).user;
-                // Future<bool> user = SignIn.userSignIn(mail_phone.text, password.text);
-                print(user.toString());
-                if(user==null) {
-                  TextButton(
-                    child: Text(''),
-                    onPressed: () => showDialog(context: context, builder: (BuildContext context) =>
-                    AlertDialog(
-                      content: const Text('Invalid User Password'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    )
-                    ),
-                  );
-                }
-                else {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
-                }
+              ElevatedButton(onPressed: () {
+                checkLogIn();
 
               }, child: Text(
                 'Log in',
