@@ -6,6 +6,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:check_in/shared/Option.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:check_in/services/register.dart';
+import 'package:check_in/services/alertDialog.dart';
+import 'package:check_in/pages/home.dart';
 
 
 
@@ -34,7 +37,7 @@ class _SignUpState extends State<SignUp> {
       "occupation": occupation.text,
       "nationality": nationality.text,
       "phone_mail": phoneMail.text,
-      "password": password.text
+      // "password": password.text
     };
     FirebaseFirestore.instance.collection("user_info").add(userData);
   }
@@ -47,11 +50,25 @@ class _SignUpState extends State<SignUp> {
   //     "lastname": lastName.text,
   //     "occupation":occupation.text,
   //     "nationality": nationality.text,
-  //     "phone": phoneMail.text,
-  //     "pass": password.text
+  //     "phone": phoneMail.text,aw
+  //     // "pass": password.text
   //   });
   //   print("Body: "+response.statusCode.toString());
   // }
+
+  void authUser() async{
+    bool mailAlreadyUse = await Register.userRegistration(phoneMail.text, password.text);
+    print("Value:"+mailAlreadyUse.toString());
+    if(mailAlreadyUse!=true) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          alertDialog('Email already in use.\nGo Back\nJust Click Here', 1)));    }
+    else {
+      sendData();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+          Home()));
+    }
+
+  }
 
 
 
@@ -61,11 +78,15 @@ class _SignUpState extends State<SignUp> {
 
 
       //color: Colors.grey,
-      body: Column(
+      body: SafeArea(
         //mainAxisAlignment: MainAxisAlignment.start,
         //crossAxisAlignment: CrossAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Padding(padding: EdgeInsets.only(right: 220)),
               Text(
@@ -82,6 +103,7 @@ class _SignUpState extends State<SignUp> {
           ),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
@@ -93,8 +115,9 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                           labelText: 'First Name',
                           icon: Icon(Icons.person),
-                          hintText: 'Enter your First Name'
+                          hintText: 'Enter your First Name',
                       ),
+
                     ),
                   ),
 
@@ -159,7 +182,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   ElevatedButton(onPressed: (){
-                    sendData();
+                    authUser();
                   },
                       child: Text(
                         'submit'
@@ -176,8 +199,10 @@ class _SignUpState extends State<SignUp> {
             ],
           ),
         ],
+          ),
       ),
 
+    ),
     );
   }
 }
