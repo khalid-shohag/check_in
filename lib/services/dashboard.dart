@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UserDashboard extends StatefulWidget {
-  const UserDashboard({Key? key}) : super(key: key);
+  var name, occupation, nationality, mail;
+   UserDashboard(this.name, this.occupation, this.nationality, this.mail);
 
   @override
   State<UserDashboard> createState() => _UserDashboardState();
@@ -23,6 +24,7 @@ class _UserDashboardState extends State<UserDashboard> {
 
       body: Container(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               children: [
@@ -41,15 +43,23 @@ class _UserDashboardState extends State<UserDashboard> {
                         color: Colors.black,
                       ),),
                       Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text('Name: '),
+                      Text('Name: ',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text(widget.name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+                      color: Colors.white),),
                       Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text("Occupation: "),
+                      Text("Occupation: ",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text(widget.occupation, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+                          color: Colors.white),),
                       Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text("Nationality: "),
+                      Text("Nationality: ",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text(widget.nationality, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+                          color: Colors.white),),
                       Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text("Email: "),
+                      Text("Email: ",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text(widget.mail, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+                          color: Colors.white),),
                       Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Text("Meter No: "),
+                      Text("Meter No: ",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ),

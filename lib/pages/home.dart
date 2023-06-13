@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
       print("Working");
     }
     else {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDashboard()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(mail_phone.text)));
     }
   }
 
