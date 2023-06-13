@@ -6,6 +6,7 @@ import 'package:check_in/services/sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:check_in/pages/login_page.dart';
 import 'package:check_in/services/alertDialog.dart';
+import 'package:check_in/services/dashboard.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
       print("Working");
     }
     else {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(mail_phone.text)));
     }
   }
 

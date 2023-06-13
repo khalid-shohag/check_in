@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
       "phone_mail": phoneMail.text,
       // "password": password.text
     };
-    FirebaseFirestore.instance.collection("user_info").add(userData);
+    FirebaseFirestore.instance.collection("user_info").doc(phoneMail.text).set(userData);
   }
 
 
