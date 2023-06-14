@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Check In',
         style: TextStyle(
           fontSize: 22,
