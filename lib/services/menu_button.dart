@@ -5,7 +5,8 @@ import 'package:check_in/services/meter/add_new_meter.dart';
 enum SampleItem { itemOne, itemTwo, itemThree }
 
 class MenuButton extends StatefulWidget {
-  const MenuButton({Key? key}) : super(key: key);
+  var mail;
+  MenuButton(this.mail);
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -13,6 +14,7 @@ class MenuButton extends StatefulWidget {
 
 class _MenuButtonState extends State<MenuButton> {
   SampleItem? selectedMenu;
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,10 @@ class _MenuButtonState extends State<MenuButton> {
           children: [
             ElevatedButton(
                 onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMeter()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMeter(widget.mail, counter)));
+                  setState(() {
+                    counter++;
+                  });
                 }
                 , child: Text('Add new meter')),
           ],

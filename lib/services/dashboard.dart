@@ -22,7 +22,7 @@ class _UserDashboardState extends State<UserDashboard> {
           ),),
         centerTitle: true,
         actions: [
-            MenuButton(),
+            MenuButton(widget.mail),
         ],
 
       ),
