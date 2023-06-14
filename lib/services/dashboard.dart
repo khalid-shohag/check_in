@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'menu_button.dart';
 
 class UserDashboard extends StatefulWidget {
   var name, occupation, nationality, mail;
@@ -13,12 +14,16 @@ class _UserDashboardState extends State<UserDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('User Dashboard',
           style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold
           ),),
         centerTitle: true,
+        actions: [
+            MenuButton(),
+        ],
 
       ),
 
